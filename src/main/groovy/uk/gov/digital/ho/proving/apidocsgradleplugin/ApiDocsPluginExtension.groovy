@@ -1,4 +1,4 @@
-package uk.gov.digital.ho.proving
+package uk.gov.digital.ho.proving.apidocsgradleplugin
 
 /**
  * @Author Home Office Digital

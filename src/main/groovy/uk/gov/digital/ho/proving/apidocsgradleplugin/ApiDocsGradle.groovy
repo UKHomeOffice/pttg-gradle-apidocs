@@ -1,4 +1,4 @@
-package uk.gov.digital.ho.proving
+package uk.gov.digital.ho.proving.apidocsgradleplugin
 
 import org.asciidoctor.gradle.AsciidoctorPlugin
 import org.gradle.api.Plugin
@@ -10,6 +10,8 @@ import org.gradle.api.tasks.testing.Test
  * @Author Home Office Digital
  */
 class ApiDocsGradle implements Plugin<Project> {
+
+    def springRestDocsVersion = '1.1.0.RC1'
 
     @Override
     void apply(Project project) {
@@ -25,8 +27,11 @@ class ApiDocsGradle implements Plugin<Project> {
             plugins.apply(AsciidoctorPlugin)
 
             dependencies {
-                testCompile libraries.springrestdocs
+                testCompile "org.springframework.restdocs:spring-restdocs-core:$springRestDocsVersion"
+                testCompile "org.springframework.restdocs:spring-restdocs-restassured:$springRestDocsVersion"
             }
+
+            task("pttgApiDocsGradlePluginUsage", type: UsageTask)
 
             sourceSets {
                 doc {

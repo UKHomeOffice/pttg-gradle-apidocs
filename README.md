@@ -11,7 +11,7 @@ buildscript {
             jcenter()
        }
        dependencies {
-           classpath 'pttg-gradle-common:pttgApiDocsGradle:1.0.RELEASE'
+           classpath 'pttg-gradle-common:pttgApiDocsGradle:1.1.RELEASE'
        }
 }
 ```
@@ -21,8 +21,11 @@ buildscript {
 ```
 apply plugin: 'pttgApiDocsGradle'
 ```
+3. User guide
+See the following documentation. In your project you can also execute the 'pttgApiDocsGradlePluginUsage' task to
+see usage instructions and version information etc.
 
-3. Configuring the plugin
+4. Configuring the plugin
 
 Customise configuration using the 'apidocs' extension block and override any properties you wish to change.
 The available properties and their defaults are shown in this sample:
@@ -57,3 +60,14 @@ where
    2. documentation / generateApiDocs : run the api doc test cases and generate the final HTML and PDF documentation
    3. build / buildWithApiDocs : perform a full build including the api doc tests, adding the generated documentation to a copy of the final jar 
 
+
+### Development
+
+1. Increment the minor version number (still needs to be RELEASE because I can't figure out how to make the git-repo plugin support snapshots)
+2. Make your changes
+3. You can use publishMavenJavaPublicationToMavenLocal to deploy the change to your local maven repo
+   1. Note however that this won't work if your changes add new transitive third-party dependencies
+4. Test consumption of the plugin from another project by
+   1. Adding mavenLocal() to your buildscript repositories to consume form local repo
+   2. using the new version number for the plugin in your buildscript dependencies
+   3. You may well need to execute ``` ./gradlew --refresh-dependencies``` to pick up changes, then refresh your IDE
