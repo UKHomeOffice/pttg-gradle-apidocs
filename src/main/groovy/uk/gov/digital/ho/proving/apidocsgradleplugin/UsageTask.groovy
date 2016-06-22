@@ -40,7 +40,7 @@ class UsageTask extends DefaultTask {
             "\n" +
             "    buildWithApiDocs: perform a full build and add the generated documentation to the final jar\n" +
             "\n" +
-            "The plugin expects a convetional layout of source adoc files and tests\n" +
+            "The plugin expects a conventional layout of source adoc files and tests\n" +
             "The standard layout can be modified using any of the following properties\n" +
             "\n" +
             "    apidocs{\n" +
