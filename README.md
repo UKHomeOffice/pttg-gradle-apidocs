@@ -8,6 +8,7 @@
 buildscript {
        repositories{
             maven { url "https://github.com/UKHomeOffice/pttg-gradle-repo/raw/master/releases" }
+            jcenter()
        }
        dependencies {
            classpath 'pttg-gradle-common:pttgApiDocsGradle:1.0.RELEASE'
