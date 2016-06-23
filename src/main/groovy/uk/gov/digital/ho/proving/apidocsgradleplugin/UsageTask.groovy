@@ -15,7 +15,7 @@ class UsageTask extends DefaultTask {
     def usageReport() {
 
         try {
-            def usage = this.getClass().getResource('/usage/usage.txt').text
+            def usage = this.getClass().getResource('/usage/apidocs-plugin-usage.txt').text
             println usage
         } catch (Exception e) {
             println "Error loading usage report"
