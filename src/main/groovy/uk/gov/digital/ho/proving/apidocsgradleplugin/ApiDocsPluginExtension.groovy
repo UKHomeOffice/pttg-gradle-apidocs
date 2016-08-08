@@ -12,4 +12,6 @@ class ApiDocsPluginExtension {
     def String jarDocsDir = 'static/docs'
 
     def String snippetsDir = 'build/generated-snippets'
+
+    def String jarAppendix = 'docs'
 }

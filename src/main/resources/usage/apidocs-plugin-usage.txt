@@ -32,6 +32,30 @@ The standard layout can be modified using any of the following properties
         sourceDocsDir = 'src/doc'
         jarDocsDir = 'static/docs'
         snippetsDir = 'build/generated-snippets'
+        jarAppendix = 'docs'
+    }
+
+To generate a Spring Boot executable jar containing the docs, you must also execute bootRepackage.
+This can be done with a task such as:
+
+    task buildSpringBootWithApiDocs(type: BootRepackage, dependsOn: buildWithApiDocs) {
+        group 'build'
+        description 'Builds the jar as a Spring Boot executable jar containing the api docs'
+    }
+
+If you have custom manifest entries then you must pass them to the buildWithApiDocs task eg:
+
+    ext.sharedManifest = manifest {
+        attributes(
+            'Implementation-Title': "${jar.baseName}",
+            'Implementation-Version': version
+        )
+    }
+
+    buildWithApiDocs{
+        manifest = project.manifest {
+            from sharedManifest
+        }
     }
 
 See full details in the plugin readme in github at https://github.com/UKHomeOffice/pttg-gradle-apidocs

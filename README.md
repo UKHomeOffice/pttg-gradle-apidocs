@@ -39,6 +39,7 @@ apidocs{
     sourceDocsDir = 'src/doc'
     jarDocsDir = 'static/docs'
     snippetsDir = 'build/generated-snippets'
+    jarAppendix = 'docs'
 }
 ```
 
@@ -47,6 +48,47 @@ where
  * sourceDocsDir = location of your 'asciidoc' and 'resources' folders containing asciidoc files (eg your index.adoc) and template overrides
  * jarDocsDir = location to put the generated documentation (HTML and PDF) in the project jar
  * snippetsDir = working directory where spring-rest-docs will generate adoc fragments from your test cases
+ * jarAppendix = appendix to append to the jar name
+ 
+5. Using the plugin in conjunction with SpringBoot
+
+The buildWithApiDocs task generates a jar containing the project outputs and the generated api docs.
+To produce a Spring Boot executable jar, you must then execute the bootRepackage task.
+These steps can be combined with a custom task such as the following:
+
+```
+task buildSpringBootWithApiDocs(type: BootRepackage, dependsOn: buildWithApiDocs) {
+    group 'build'
+    description 'Builds the jar as a Spring Boot executable jar containing the api docs'
+}
+```
+
+6. Modifying the jar manifest
+
+The buildWithApiDocs task generates a default jar manifest. If you have customised the project's jar manifest then those
+customisations should be passed to the buildWithApiDocs task by extracting a shared manifest such as:
+
+```
+version = blah
+
+ext.sharedManifest = manifest {
+    attributes(
+        'Implementation-Title': "${jar.baseName}",
+        'Implementation-Version': version
+    )
+}
+```
+
+which can then be re-used in your jar task or the buildWithApiDocs task as follows:
+
+```
+buildWithApiDocs{
+    manifest = project.manifest {
+        from sharedManifest
+    }
+}
+```
+ 
 
 ### What this plugin gives your build automatically
 

@@ -74,10 +74,8 @@ class ApiDocsGradle implements Plugin<Project> {
                 project.afterEvaluate { // Wait for regular jar task to be evaluated first
 
                     baseName = jar.baseName
-                    appendix = "api+docs"
+                    appendix = "${project.apidocs.jarAppendix}"
                     version = jar.version
-
-                    manifest { attributes('Main-Class': "$mainClassName") }
 
                     from zipTree(jar.archivePath)
                     from("${asciidoctor.outputDir}/html5/index.html") { into "${project.apidocs.jarDocsDir}" }
