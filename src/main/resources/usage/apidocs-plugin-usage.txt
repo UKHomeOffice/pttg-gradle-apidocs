@@ -58,6 +58,17 @@ If you have custom manifest entries then you must pass them to the buildWithApiD
         }
     }
 
+You could also apply the manifest to all Jar tasks, eg:
+
+    tasks.withType(Jar) {
+        manifest {
+            attributes(
+                'Implementation-Title': "${jar.baseName}",
+                'Implementation-Version': version
+            )
+        }
+    }
+
 See full details in the plugin readme in github at https://github.com/UKHomeOffice/pttg-gradle-apidocs
 
 ************************************ END OF USAGE REPORT ******************************
