@@ -11,7 +11,7 @@ import org.gradle.api.tasks.testing.Test
  */
 class ApiDocsGradle implements Plugin<Project> {
 
-    def springRestDocsVersion = '1.1.0.RC1'
+    def springRestDocsVersion = '1.1.0'
 
     @Override
     void apply(Project project) {
